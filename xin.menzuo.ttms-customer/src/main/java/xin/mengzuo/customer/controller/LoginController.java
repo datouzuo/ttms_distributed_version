@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,21 +27,15 @@ public class LoginController {
 	@Autowired
 	private LoginService ls;
 
-	@RequestMapping(value = "/user/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/login",method=RequestMethod.POST)
 	@ResponseBody
-	public TtmsResult register(String email, String password, HttpServletRequest request, HttpServletResponse response,
-			String revix) throws Exception {
-         System.out.println(revix);
-         
-		if (request.getSession().getAttribute("revix")!=null&&revix!=null)
-				if(revix.equals(request.getSession().getAttribute("revix"))) {
-			TtmsResult tm = ls.login(email, password,request,response);
-			String session = tm.getMsg();
+	public TtmsResult register( String email,  String password) throws Exception {		
+			TtmsResult tm = ls.login(email, password);
 			return tm;
-		} 
-		throw new Exception();
-			/*return TtmsResult.build(400, "验证码错误");*/
 		
-		
+	}
+	@RequestMapping(value = "/user")
+	public TtmsResult get(HttpServletRequest request) {
+		return TtmsResult.ok(CookieUtils.getCookieValue(request, "tokenId"));
 	}
 }

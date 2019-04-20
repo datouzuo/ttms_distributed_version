@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.PageRequest;
@@ -52,21 +53,23 @@ public class MovieManagerController {
     //添加电影
    /* ,MultipartFile[] files*/
     @RequestMapping("admin/movie/add")
-	 public TtmsResult addMovie( Movie movie,MultipartFile[] files) throws IllegalStateException, IOException {
-		StringBuilder sb = new StringBuilder();
+	 public TtmsResult addMovie( Movie movie,MultipartFile[] files,HttpServletRequest request) throws IllegalStateException, IOException {
+		
+    	StringBuilder sb = new StringBuilder();
     	for(MultipartFile file : files) {  
         
                 String picName = UUID.randomUUID().toString();
                 // 获取文件名
                 String oriName = file.getOriginalFilename();
-                    System.err.println(oriName+"图片名字");
+                   
                 // 获取图片后缀
                 String extName = oriName.substring(oriName.lastIndexOf("."));
-                    System.err.println("后缀名字"+extName);
+                  
                     String pic=null;
                 if(extName.equals(".jpg")||extName.equals(".png")){
                       pic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+"static/img"+picName+extName;//拼接图片地
-                    file.transferTo(new File(pic));
+                    String iamages = request.getRemoteAddr()+":"+request.getRemotePort()+"/img/"+picName+extName;
+                      file.transferTo(new File(pic));
                     // 设置图片名到商品中
                     sb.append(pic).append(",");
                     System.err.println("上传图片完成");
@@ -123,4 +126,14 @@ public class MovieManagerController {
     public void update(@PathVariable Integer movieId) {
     	
     }*/
+    //用户查找电影，不需要登录的接口
+    @RequestMapping("/noLogin/findAllMovie")
+    public TtmsResult cusFindAllMovie() {
+    	
+    	
+    	
+    	return null;
+    }
+    
+    
 }

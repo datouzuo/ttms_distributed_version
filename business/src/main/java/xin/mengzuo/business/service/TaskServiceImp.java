@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import xin.mengzuo.business.repository.TicketRepository;
-
+/**
+ * 
+ * @author 左利伟
+ *票的管理
+ */
 @Service
 @Transactional
 public class TaskServiceImp implements TaskService{
@@ -15,7 +19,9 @@ public class TaskServiceImp implements TaskService{
   	@Autowired
 	private TicketRepository tr;
 
-  	
+  	/**
+  	 * 改变票的状态
+  	 */
   	
 	@Override
 	public void changeStatus(List<Integer> ids) {
@@ -23,7 +29,9 @@ public class TaskServiceImp implements TaskService{
 	}
 
 
-
+/**
+ * 查找票的状态
+ */
 	@Override
 	public Integer selectStatus(Integer id) {
 	

@@ -11,11 +11,7 @@ import org.springframework.core.env.Environment;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 import redis.clients.jedis.JedisPoolConfig;
-/**
- * 配置集群
- * @author 左利伟
- *
- */
+
 @Configuration
 public class JedisConfig {
 

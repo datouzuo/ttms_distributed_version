@@ -11,7 +11,7 @@ public class TtmsResult implements Serializable{
     // 响应消息
     private String msg;
 
-    // 响应中的数据
+    // 响应中的数
     private Object data;
 
     public static TtmsResult build(Integer status, String msg, Object data) {

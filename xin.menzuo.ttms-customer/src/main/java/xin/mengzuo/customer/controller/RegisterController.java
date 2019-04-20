@@ -3,6 +3,7 @@ import java.awt.image.BufferedImage;
 import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import xin.mengzuo.customer.config.CookieUtils;
 import xin.mengzuo.customer.config.TtmsResult;
-import xin.mengzuo.customer.config.VerifyUtil;
+
 import xin.mengzuo.customer.pojo.User;
 import xin.mengzuo.customer.service.RegisterService;
 /**
@@ -34,21 +36,22 @@ public class RegisterController {
     private RegisterService rese;
     //注册
 	@RequestMapping(value="/user/registerservice",method=RequestMethod.POST)
-	public TtmsResult registerSave(@RequestBody User user,HttpServletRequest request,String revix) {
+	public TtmsResult registerSave( @RequestBody User user,HttpServletRequest request, String revix) {
 		
 		boolean b=false;
-			if (request.getSession().getAttribute("revix").equals(revix)) {
-				 b= rese.register(user, request.getLocalAddr() + ":" + request.getRemotePort());
-			
-		}
+		System.out.println(user.getEmail());
+		
+		
+				b = rese.register(user);
+		
 			if(b)
 		   return TtmsResult.build(200, "成功");
 			
-			return TtmsResult.build(400, "数据重复");
+			return TtmsResult.build(400, "数据重复或邮箱错误");
 	}
 	//动态验证是否信息是否重复
 	@RequestMapping(value="/user/registercheck",method=RequestMethod.GET)
-	public TtmsResult registerCheck(String msg ,int type) {
+	public TtmsResult registerCheck(String msg,HttpServletRequest request ,int type) {
 	
 		boolean b = rese.checkSave(msg,type);
 		if(!b) {
@@ -58,27 +61,9 @@ public class RegisterController {
 		}
 	}	
 	//激活账号
-	@RequestMapping(value="/user/mail/{phone}")
-	public String mailPhone(@PathVariable String phone) {
-		rese.mailPhoneActive(phone);
-		return "激活成功";
+	@RequestMapping(value="/user/mail/{activecode}")
+	public TtmsResult mailPhone(@PathVariable String activecode) {
+		rese.mailPhoneActive(activecode);
+		return TtmsResult.ok();
 	}
-	//生成验证码
-	
-    @GetMapping("/getcode")
-    public void getCode(HttpServletResponse response, HttpServletRequest request) throws Exception{
-        HttpSession session=request.getSession();
-        //利用图片工具生成图片
-        //第一个参数是生成的验证码，第二个参数是生成的图片
-        Object[] objs = VerifyUtil.createImage();
-        //将验证码存入Session
-        session.setAttribute("revix",objs[0]);
-
-        //将图片输出给浏览器
-        BufferedImage image = (BufferedImage) objs[1];
-        response.setContentType("image/png");
-        OutputStream os = response.getOutputStream();
-        ImageIO.write(image, "png", os);
-    }
-	
 }

@@ -1,5 +1,7 @@
 package xin.mengzuo.customer.serviceImp;
 
+import java.util.UUID;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -31,7 +33,7 @@ public class RegisterServiceImp implements RegisterService {
  private JavaMailSender javaMailSender;	
 	
 	@Override
-	public boolean register(User user,String local) {
+	public boolean register(User user) {
 	   boolean check;
 	   check = checkSave(user.getUsername(), 1);
 	   if(check) {
@@ -49,7 +51,9 @@ public class RegisterServiceImp implements RegisterService {
 	   user.setPassword(password);
 	   user.setActive(0);
 	   redao.save(user);
-	   sendSimpleMail(user.getEmail(),local,user.getPhone());
+	   String code = UUID.randomUUID().toString();
+	   user.setActivecode(code);
+	   sendSimpleMail(user.getEmail(),code);
 		return true;
 	}
 
@@ -76,7 +80,7 @@ public class RegisterServiceImp implements RegisterService {
 		return false;
 	}
 	//发送邮件激活账号
-	 public void sendSimpleMail(String mail,String local,String phone){
+	 public void sendSimpleMail(String mail,String code){
 	        MimeMessage message = null;
 	        try {
 	            message = javaMailSender.createMimeMessage();
@@ -86,9 +90,9 @@ public class RegisterServiceImp implements RegisterService {
 	            helper.setSubject("点击连接激活账号");
 
 	            StringBuffer sb = new StringBuffer();
-	            sb.append("<h1>点击激活账号</h1>")
-	                    .append("<a herf="+local+"/user/mail/"+phone+">");
-	                    
+	            sb.append("<h1>输入激活码激活</h1>")
+	                    .append("激活码:"+code);
+	               System.out.println(sb.toString());     
 	            helper.setText(sb.toString(), true);
 	            javaMailSender.send(message);
 	        } catch (MessagingException e) {
@@ -96,8 +100,8 @@ public class RegisterServiceImp implements RegisterService {
 	        }
 	    }
 //激活账号
-	 public void mailPhoneActive(String phone) {
-		User user = redao.findByPhone(phone);
+	 public void mailPhoneActive(String code) {
+		User user = redao.findByActivecode(code);
 		 user.setActive(1);
 	 }
 }

@@ -2,7 +2,6 @@ package xin.mengzuo.studiomanager.config;
 
 import java.io.Serializable;
 
-
 public class TtmsResult implements Serializable{
 
     // 响应业务状态
@@ -46,6 +45,10 @@ public class TtmsResult implements Serializable{
         this.data = data;
     }
 
+//    public Boolean isOK() {
+//        return this.status == 200;
+//    }
+
     public Integer getStatus() {
         return status;
     }
@@ -69,5 +72,4 @@ public class TtmsResult implements Serializable{
     public void setData(Object data) {
         this.data = data;
     }
-   
 }

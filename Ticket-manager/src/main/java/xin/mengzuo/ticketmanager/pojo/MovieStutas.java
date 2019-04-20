@@ -1,6 +1,6 @@
 package xin.mengzuo.ticketmanager.pojo;
 /**
- * 生成演出计划的条件
+ * 生成演出计划的条
  * @author 左利伟
  *
  */

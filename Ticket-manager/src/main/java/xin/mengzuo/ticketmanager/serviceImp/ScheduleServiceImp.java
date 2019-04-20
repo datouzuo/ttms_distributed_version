@@ -52,5 +52,24 @@ public class ScheduleServiceImp implements ScheduleService{
 		}
 		
 	}
+	//查找指定的时间的场次
+	@Override
+	public List<Schedule> findThisSchedule(Long startTime, Long endTime) {
+		List<Schedule> schedule = scheRe.findByStartTime(startTime, endTime);
+		
+		return schedule;
+	}
+	@Override
+	public List<Schedule> findScheduleByIdAndTime(Long startTime, 
+			Long endTime,String movieId) {
+		
+		return scheRe.findByMovieIdAndTime(startTime, endTime,
+				movieId);
+	}
+	@Override
+	public List<Ticket> findInTicketIds(List ticketId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

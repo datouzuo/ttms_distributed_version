@@ -7,6 +7,7 @@ import xin.mengzuo.customer.pojo.User;
 @Repository
 public interface RegisterDao extends JpaRepository<User, Integer>{
 public User findByUsername(String username);
-public User findByEmail(String email);
+public User findByActivecode(String code);
 public User findByPhone(String Phone);
+public User findByEmail(String email);
 }

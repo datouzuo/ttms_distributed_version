@@ -11,5 +11,5 @@ import xin.mengzuo.customer.config.TtmsResult;
  * @author 左利伟
  */
 public interface LoginService {
-	public TtmsResult login(String email, String password,HttpServletRequest request, HttpServletResponse response)throws JsonProcessingException;
+	public TtmsResult login(String email, String password)throws JsonProcessingException;
 }

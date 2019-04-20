@@ -59,5 +59,12 @@ public class MovieServiceImp implements MovieService{
 		repository.saveAndFlush(movie);
 		
 	}
+	
+	@Override
+	public List<Movie> cusFindAllMovie() {
+		//TODO
+		
+		return null;
+	}
 
 }

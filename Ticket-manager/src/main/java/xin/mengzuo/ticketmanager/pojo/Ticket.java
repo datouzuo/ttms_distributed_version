@@ -15,7 +15,15 @@ public class Ticket {
 	private Integer ticketStatus;
 	private Integer seatRow;
 	private Integer seatColumn;
+    private Integer schedId;
 
+	public Integer getSchedId() {
+		return schedId;
+	}
+
+	public void setSchedId(Integer schedId) {
+		this.schedId = schedId;
+	}
 
 	public Integer getTicketId() {
 		return ticketId;

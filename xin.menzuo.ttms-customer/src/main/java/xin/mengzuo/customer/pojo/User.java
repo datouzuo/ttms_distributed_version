@@ -27,6 +27,17 @@ public class User implements Serializable{
 	
 	@Column
 	private Integer active;
+	@Column
+	private String activecode;
+
+	public String getActivecode() {
+		return activecode;
+	}
+
+	public void setActivecode(String activecode) {
+		this.activecode = activecode;
+	}
+
 
 	public Integer getUserid() {
 		return userid;
@@ -68,12 +79,14 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	public int getActive() {
+	public Integer getActive() {
 		return active;
 	}
 
-	public void setActive(int active) {
+	public void setActive(Integer active) {
 		this.active = active;
 	}
-	
+
+
+
 }

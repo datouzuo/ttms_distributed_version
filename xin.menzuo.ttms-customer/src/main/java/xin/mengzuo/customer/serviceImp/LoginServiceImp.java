@@ -2,6 +2,7 @@ package xin.mengzuo.customer.serviceImp;
 
 import java.util.UUID;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,21 +35,23 @@ public class LoginServiceImp implements LoginService {
 	
 	@Autowired
 	private ObjectMapper json;
-	public TtmsResult login(String email, String password,HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
+	public TtmsResult login(String email, String password) throws JsonProcessingException {
 		User user = ld.findByEmail(email);
 		String pString = DigestUtils.md5DigestAsHex(password.getBytes());
 		// 密码比对
-		if(user!=null) {
+		if(user!=null&&user.getActive()==1) {
 		if (pString.equals(user.getPassword())) {
 			String session = UUID.randomUUID().toString();
-			user.setPassword(null);
+		
 			// 将session写到redis集群
 			cluster.set("tokenId:" + session, json.writeValueAsString(user));
 			cluster.expire("tokenId:" + session, 1800);
-			CookieUtils.setCookie(request, response, "tokenId", session);
-	       return TtmsResult.build(200, "登录成功");
+	       return TtmsResult.build(200, "登录成功", session);
 		} 
-		}	return TtmsResult.build(400, "用户名或密码错误");
+		}	
+		return TtmsResult.build(400, "用户名或密码错误");
 		
 	}
+	
+	
 }
