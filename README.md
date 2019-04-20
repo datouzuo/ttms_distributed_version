@@ -3,9 +3,9 @@
 #### 介绍
 {**网上购票系统，以及后台管理系统}
   采用spring boot 和 spring cloud 完成的微服务的架构。包括服务注册，服务发现，熔断，网关等；
-   **基础服务** ：xin.menzuo.ttms-customer （单点登录，采用邮箱进行账号激活，redis存取session），studio-manager （电影管理,以及座位管理），movie-manager （电影管理以及座位管理），buyTicketsAndStatistic （购票管理，评论管理），business （异步的统计和异步的影票解锁业务）， Ticket-manager （电影场次和影票的管理，根据传入电影和比重，自动生成电影场次）。
-  ** 前置服务** ：通过调用调用基础服务完成业务对基础服务存在熔断和负载均衡。（不需要登录的前置服务），（需要管理员权限的前置服务），（需要顾客的登录的前置服务）；
-   **网关** ：采用spring cloud zuul，路由到3个前置服务，对前置业务存在熔断和负载均衡。
+  - **基础服务** ：xin.menzuo.ttms-customer （单点登录，采用邮箱进行账号激活，redis存取session），studio-manager （电影管理,以及座位管理），movie-manager （电影管理以及座位管理），buyTicketsAndStatistic （购票管理，评论管理），business （异步的统计和异步的影票解锁业务）， Ticket-manager （电影场次和影票的管理，根据传入电影和比重，自动生成电影场次）。
+  -  ** 前置服务** ：通过调用调用基础服务完成业务对基础服务存在熔断和负载均衡。（不需要登录的前置服务），（需要管理员权限的前置服务），（需要顾客的登录的前置服务）；
+  -   **网关** ：采用spring cloud zuul，路由到3个前置服务，对前置业务存在熔断和负载均衡。
 
 #### 安装教程
 
