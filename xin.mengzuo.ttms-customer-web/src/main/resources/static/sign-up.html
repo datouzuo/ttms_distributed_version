@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Amaze UI Admin index Examples</title>
+		<meta name="description" content="这是一个 index 页面">
+		<meta name="keywords" content="index">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<link rel="icon" type="image/png" href="assets/i/favicon.png">
+		<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+		<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css" />
+		<link rel="stylesheet" href="assets/css/admin.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+	</head>
+
+	<body data-type="login">
+
+		<div class="am-g myapp-login">
+			<div class="myapp-login-logo-block  tpl-login-max">
+				<div class="myapp-login-logo-text">
+					<div class="myapp-login-logo-text">
+						请注册<span></span> <i class="am-icon-skyatlas"></i>
+
+					</div>
+				</div>
+
+				<div class="am-u-sm-10 login-am-center">
+					<form class="am-form">
+						<fieldset>
+							
+							<div class="am-form-group">
+								<div style="float: left; width: 90%;"><input type="email" onblur="checkmail()" class="" id="doc-ipt-email-2" placeholder="输入邮箱"></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_mail_success"><i class="am-icon-check-circle" style="color: white; font-size:25px ;"></i></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_mail_error"><i class="am-icon-exclamation-circle" style="color: white; font-size:25px ;"></i></div>
+							</div>
+							
+							<div class="am-form-group">
+								<div style="float: left; width: 90%;"><input type="password" class="" onblur="checkpass()" id="doc-ipt-pwd-2" placeholder="输入密码"></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_pwd_success"><i class="am-icon-check-circle" style="color: white; font-size:25px ;"></i></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_pwd_error"><i class="am-icon-exclamation-circle" style="color: white; font-size:25px ;"></i></div>
+							</div>
+							
+							<div class="am-form-group">
+								<div style="float: left; width: 90%;"><input type="text" class="" onblur="checkuser()" id="doc-ipt-username-2" placeholder="输入用户名"></div>
+								<div style="display:none; float: right; padding-right: 5%;" id="icon_username_success"><i class="am-icon-check-circle" style="color: white; font-size:25px ;"></i></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_username_error"><i class="am-icon-exclamation-circle" style="color: white; font-size:25px ;"></i></div>
+							</div>
+							
+							<div class="am-form-group">
+								<div id="div_user" style="float: left; width: 90%;"><input type="tel" class="" onblur="checktel()" id="doc-ipt-telephone-2" placeholder="输入电话号码"></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_tel_success"><i class="am-icon-check-circle" style="color: white; font-size:25px ;"></i></div>
+								<div style="display: none; float: right; padding-right: 5%;" id="icon_tel_error"><i class="am-icon-exclamation-circle" style="color: white; font-size:25px ;"></i></div>
+							</div>
+							<div class="am-form-group" style="width: 90%">
+								<div id="yanzhengma" style="width:25%">
+									<img onclick="refresh();" id="revix" src="http://222.24.63.59:9067/getcode" style = "height:32px; width: 100%; border-radius:0px 0px 0px 6px;" />
+								</div>
+								
+								<div id="input-yanzhengma" style="width:75%; float:right;">
+									<input type="" class="" id="doc-ipt-yanzhengma-2" style="width: 100%; border-radius:0px 0px 6px 0px ;" placeholder="输入验证码">
+								</div>
+							</div>
+							<p><button type="button" data-am-modal="{target: '#my-alert'}" onclick="signup()" class="am-btn am-btn-default">注册</button></p>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+			<div class="am-modal-dialog">
+				<div class="am-modal-hd">激活码</div>
+				<div class="am-modal-bd">
+					<input type="text" class="" id="activecode" placeholder="请输入激活码">
+				</div>
+				<div class="am-modal-footer">
+					<span class="am-modal-btn" onclick="check_activecode();">确定</span>
+				</div>
+			</div>
+		</div>
+
+		
+		<script src="js/jquery.min.js"></script>
+		<script src="js/amazeui.min.js"></script>
+		<script src="js/signup.js"></script>
+		<!--<script src="js/app.js"></script>-->
+
+	</body>
+
+</html>

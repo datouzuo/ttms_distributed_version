@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Amaze UI Admin index Examples</title>
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="icon" type="image/png" href="assets/i/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+  <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+  <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <link rel="stylesheet" href="assets/css/app.css">
+</head>
+
+<body data-type="login" id="bo_dy">
+
+  <div class="am-g myapp-login">
+	<div class="myapp-login-logo-block  tpl-login-max">
+		<div class="myapp-login-logo-text">
+			<div class="myapp-login-logo-text">
+				<span>登 录</span> <i class="am-icon-skyatlas"></i>
+				
+			</div>
+		</div>
+
+		<div class="am-u-sm-10 login-am-center">
+			<form class="am-form">
+				<fieldset>
+					<div class="am-form-group">
+						<input type="email" class="" id="doc-ipt-email-1" placeholder="输入邮箱">
+					</div>
+					<div class="am-form-group">
+						<input type="password" class="" id="doc-ipt-pwd-1" placeholder="输入密码">
+					</div>
+					<div class="am-form-group">
+						<div id="yanzhengma" style="width:25%">
+							<img onclick="refresh()" id="revix" src = "http://222.24.63.59:9067/getcode" style = "height:32px; width: 100%; border-radius:0px 0px 0px 6px;"/>
+						</div>
+						<div id="input-yanzhengma" style="width:75%; float:right;">
+							<input type="" class="" id="doc-ipt-yanzhengma-1" placeholder="输入验证码">
+						</div>
+					</div>
+					
+					<div class="am-form-group">
+						<p><button style="margin-top:20px" onclick="window.location.href='sign-up.html'" type="button" class="am-btn am-btn-success">注册</button></p>
+						<p><button type="button" onclick="login();" style="width: 100%;" class="am-btn am-btn-default">登录</button></p>
+					</div>
+					
+					<button style="visibility:hidden"
+					  type="button"
+					  id="btn_11"
+					  class="am-btn am-btn-primary"
+					  data-am-modal="{target: '#my-alert'}">
+					  Alert
+					</button>
+					
+					<button style="visibility:hidden"
+					  type="button"
+					  id="btn_12"
+					  class="am-btn am-btn-primary"
+					  data-am-modal="{target: '#my-alert-1'}">
+					  Alert
+					</button>
+					
+					
+					<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+						<div class="am-modal-dialog">
+							<div class="am-modal-hd"></div>
+							  <div class="am-modal-bd">
+									邮箱或密码错误
+								</div>
+								<div class="am-modal-footer">
+								<span class="am-modal-btn">确定</span>
+								</div>
+						</div>
+					</div>
+					
+					<div class="am-modal am-modal-alert" tabindex="-1" id="my-alert-1">
+						<div class="am-modal-dialog">
+							<div class="am-modal-hd"></div>
+							  <div class="am-modal-bd">
+									验证码错误
+								</div>
+								<div class="am-modal-footer">
+								<span class="am-modal-btn">确定</span>
+								</div>
+						</div>
+					</div>
+					
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script src="js/amazeui.min.js"></script>
+	<!--<script src="js/app.js"></script>-->
+	<script type="text/javascript" src="js/login.js"></script>
+</body>
+
+</html>
