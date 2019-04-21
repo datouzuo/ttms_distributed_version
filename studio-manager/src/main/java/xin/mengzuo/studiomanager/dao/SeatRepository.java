@@ -1,4 +1,6 @@
 package xin.mengzuo.studiomanager.dao;
+import java.util.List;
+
 //
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,5 +33,8 @@ public interface SeatRepository extends JpaRepository<Seat, Integer>{
 	@Modifying
 	@Query(value="delete from seat where studio_id = ?1",nativeQuery=true)
 	void deleteByStudioId(Integer studioId);
+	
+	
+	List<Seat> findByStudioId(Integer studioId);
 	
 }

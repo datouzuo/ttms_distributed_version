@@ -42,6 +42,11 @@ public class StudioServiceImp implements StudioService{
 	
 		return sr.findAll();
 	}
+	@Override
+	public Studio findStudio(Integer studioId) {
+		
+		return sr.getOne(studioId);
+	}
 
 	
 

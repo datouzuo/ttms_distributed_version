@@ -61,6 +61,11 @@ public class SeatServiceImp implements SeatServie{
 	
 		sr.deleteByStudioId(studioId);
 	}
+	@Override
+	public List<Seat> findByStudioId(Integer studioId) {
+		
+		return sr.findByStudioId(studioId);
+	}
 
 	
 

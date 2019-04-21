@@ -31,7 +31,7 @@ public class RegisterServiceImp implements RegisterService {
  private RegisterDao redao;
  @Autowired
  private JavaMailSender javaMailSender;	
-	
+
 	@Override
 	public boolean register(User user) {
 	   boolean check;

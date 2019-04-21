@@ -68,7 +68,7 @@ public class MovieManagerController {
                     String pic=null;
                 if(extName.equals(".jpg")||extName.equals(".png")){
                       pic=Thread.currentThread().getContextClassLoader().getResource("").getPath()+"static/img"+picName+extName;//拼接图片地
-                    String iamages = request.getRemoteAddr()+":"+request.getRemotePort()+"/img/"+picName+extName;
+                    String iamages = request.getRemoteAddr()+":"+request.getLocalPort()+"/img/"+picName+extName;
                       file.transferTo(new File(pic));
                     // 设置图片名到商品中
                     sb.append(pic).append(",");

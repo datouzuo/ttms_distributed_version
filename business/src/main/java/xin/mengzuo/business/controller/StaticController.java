@@ -24,7 +24,7 @@ public class StaticController {
 public TtmsResult findByDateDay(@PathVariable String dateDay)
 	{
 		return TtmsResult.ok(ss.findByDateDayOrderMouthMoneyDesc(dateDay));
-		
+	
 	}
 /**
  * 查找电影所有日子票房

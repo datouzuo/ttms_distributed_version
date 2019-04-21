@@ -9,5 +9,6 @@ public interface StudioService {
   void addStudio(Studio studio);
    void deleteStudio(Integer studioId);
    List<Studio> findAll();
+   Studio findStudio(Integer studioId);
 
 }

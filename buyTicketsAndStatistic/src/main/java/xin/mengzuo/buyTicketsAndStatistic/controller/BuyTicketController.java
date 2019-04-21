@@ -1,6 +1,7 @@
 package xin.mengzuo.buyTicketsAndStatistic.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -18,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import redis.clients.jedis.JedisCluster;
 import xin.mengzuo.buyTicketsAndStatistic.config.CookieUtils;
@@ -78,7 +82,7 @@ public class BuyTicketController {
 	public TtmsResult payMoney(String billId,HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
 		String value = CookieUtils.getCookieValue(request, "tokenId");
 		//从reids种获得订单
-		String billString = cluster.get(value+":"+billId);
+		String billString = cluster.get("tokenId:"+value+":"+billId);
 		
 		Bill bill = obJeson.readValue(billString, Bill.class);
 		
@@ -115,6 +119,34 @@ public class BuyTicketController {
 		
 		
 	}
+	/**
+	 * 将订单存到redis缓冲
+	 * 时间15分钟
+	 * @author 左利伟
+	 */
+	@RequestMapping("/bill/creatBill")
+	public TtmsResult creatBill(Bill bill,String cookie) throws JsonProcessingException {
+		String biS = obJeson.writeValueAsString(bill);
+		cluster.set("tokenId:"+cookie+bill.getBillId(), biS);
+		cluster.expire("tokenId:"+cookie+bill.getBillId(), 900);
+		return TtmsResult.ok();
+		
+	}
+	/**
+	 * 将Redis中订单全部找chu
+	 * @author 左利伟
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 */
+	@RequestMapping(value="find/allBill")
+	public TtmsResult findAllBill(String cookie) throws JsonParseException, JsonMappingException, IOException {
+		JavaType type = obJeson.getTypeFactory().constructParametricType(List.class,Bill.class);
+		String strbill = cluster.get("tokenId:"+cookie+"*");
+		List<Bill> billList = obJeson.readValue(strbill, type);
+		return TtmsResult.ok(billList);
+	}
+	
 	
 	public void sendSimpleMail(String mail,String code){
         MimeMessage message = null;

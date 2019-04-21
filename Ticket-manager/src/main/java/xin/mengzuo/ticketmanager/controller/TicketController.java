@@ -67,4 +67,7 @@ public class TicketController {
 	    }
 		return TtmsResult.build(500,"你的票已空");
 }
+	
+
+	
 }

@@ -17,6 +17,6 @@ public class BusinessApplication {
 		SpringApplication.run(BusinessApplication.class, args);
 	}
 
-	
+
 }
 
